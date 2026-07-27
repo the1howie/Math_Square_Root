@@ -30,5 +30,5 @@ def overwrite_squares_json():
     write_squares_to_json(squares)
 
 
-if __name__ == "__main__":
-    overwrite_squares_json()
+# if __name__ == "__main__":
+#     overwrite_squares_json()
