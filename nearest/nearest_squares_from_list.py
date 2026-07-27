@@ -1,3 +1,9 @@
+import sys
+import os
+
+SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
 import json
 import ijson
 from utils import get_json_len  # , timer  #, profile
@@ -75,7 +81,7 @@ def nearest_square_from_list_iter(num):
 
 
 if __name__ == "__main__":
-    num = 100
+    num = 95
     print(f"Find nearest square(s) to {num}:\n")
 
     lbound, ubound = nearest_square_from_list(num)
