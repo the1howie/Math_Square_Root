@@ -5,38 +5,50 @@ The bisection method is linearly convergent..
 
 We start with an interval x ∈ (a, b) for x = √S.
 
-We halve the interval with each iteration, for example x₀ = (a + b)/2, until |xₙ - S| < ε.
+We halve the interval with each iteration, for example x₀ = (a + b)/2, until |xₙ - S| < τ.
 
 This is the slowest converging method however, it is a good start for students.
 """
 
+# from utils import trace_locals
 
-def square_root(x, epsilon=0.000001):
-    # bisection search
+
+# Use this decorator when you want all the local variables printed.
+# @trace_locals
+def sqrt(S, tau=10 ** (-12)):
+    """Square Root using Bisection Search Method."""
+
+    # validation
+    if S < 0:
+        raise ValueError("Invalid input! Expected a positive number.")
+
+    # initial interval
+    low = 0
+    high = max(1, S)
+
+    # initial guess
+    x = (low + high) / 2
     guesses = 0
-    low = 0.0
-    high = max(1.0, x)
-    ans = (high + low) / 2.0
-    progress = "low: {0}, high: {1}, ans: {2} (ans^2: {3})"
-    while abs(ans ** 2 - x) >= epsilon:
-        print(progress.format(low, high, ans, ans**2))
+
+    # loop until the stopping criterion is met
+    while abs(x**2 - S) >= tau:
         guesses += 1
-        if ans ** 2 < x:
-            # underestimate
-            low = ans
+        if x**2 < S:
+            # guess is too low
+            low = x
         else:
-            # overestimate
-            high = ans
-        ans = (high + low) / 2.0
-    print("\nnumber of guesses: {}".format(guesses))
-    return ans
+            # guess is too high
+            high = x
+        x = (low + high) / 2
+
+    return x
+
 
 if __name__ == "__main__":
-    x = float(input("Enter positive number: "))
-    if x < 0:
-        ans = complex(0, square_root(abs(x)))
-        print("approximation for the square root of {0} is: {1}".format(x, ans))
+    S = float(input("Enter positive number: "))
+    if S < 0:
+        x = complex(0, sqrt(abs(S)))
+        print("approximation for the square root of {0} is: {1}".format(S, x))
     else:
-        ans = square_root(x)
-        print("approximation for the square root of {0} is: {1}".format(x, ans))
-        
+        x = sqrt(S)
+        print("approximation for the square root of {0} is: {1}".format(S, x))

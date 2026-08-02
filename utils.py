@@ -1,4 +1,7 @@
+#!/usr/bin/env python3
+
 import os
+import sys
 import psutil
 import ijson
 import functools
@@ -22,6 +25,27 @@ def timer(func):
         return value
 
     return wrapper_timer
+
+
+def trace_locals(func):
+    """Trace local variables inside a function."""
+
+    @functools.wraps(func)
+    def wrapper_tracer(*args, **kwargs):
+        def tracer(frame, event, arg):
+            if event == "line" and frame.f_code == func.__code__:
+                print(f"Line {frame.f_lineno} locals: {frame.f_locals}")
+            return tracer
+
+        original_trace = sys.gettrace()
+        sys.settrace(tracer)
+        try:
+            result = func(*args, **kwargs)
+        finally:
+            sys.settrace(original_trace)
+        return result
+
+    return wrapper_tracer
 
 
 def get_json_len(full_source_file_path: str) -> int:
