@@ -6,6 +6,24 @@ import psutil
 import ijson
 import functools
 import time
+import io
+from contextlib import redirect_stdout
+
+
+def capture_output(func):
+    """returns {"value": value, "printout": captured_string}"""
+
+    @functools.wraps(func)
+    def wrapper_capture_output(*args, **kwargs):
+        captured_output = io.StringIO()
+
+        with redirect_stdout(captured_output):
+            value = func(*args, **kwargs)
+
+        captured_string = captured_output.getvalue()
+        return {"value": value, "printout": captured_string}
+
+    return wrapper_capture_output
 
 
 def timer(func):

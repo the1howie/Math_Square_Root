@@ -53,5 +53,5 @@ if __name__ == "__main__":
     if S < 0:
         raise ValueError("Invalid input. Input must be a positive number.")
 
-    x = sqrt(S)
+    x = sqrt(S, print_guesses=True)
     print("approximation for the square root of {0} is: {1}".format(S, x))

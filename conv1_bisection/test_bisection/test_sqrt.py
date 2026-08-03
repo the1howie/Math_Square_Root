@@ -1,13 +1,33 @@
 #!/usr/bin/env python3
 
 import sys
-import os
+from pathlib import Path
 
-SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.dirname(SCRIPT_DIR))
+sys.path.append(str(Path(__file__)))
+sys.path.append(str(Path(__file__).parents[1]))
+sys.path.append(str(Path(__file__).parents[2]))
 
 
 import pytest
 from sqrt import sqrt
+from utils import capture_output
 
-# test number of guesses? get from stream io
+
+@capture_output
+def run_sqrt_with_print(S):
+    results = sqrt(S, print_guesses=True)
+    return results
+
+
+@pytest.mark.parametrize(
+    "value, expected, printout",
+    [
+        (2, 1.4142135623733338, "Number of guesses: 38, Threshold: 1e-12.\n"),
+        (10, 3.162277660168229, "Number of guesses: 42, Threshold: 1e-12.\n"),
+        (25, 5.000000000000071, "Number of guesses: 45, Threshold: 1e-12.\n"),
+    ],
+)
+def test_sqrt(value, expected, printout):
+    results = run_sqrt_with_print(value)
+    assert results["value"] == expected
+    assert results["printout"] == printout
