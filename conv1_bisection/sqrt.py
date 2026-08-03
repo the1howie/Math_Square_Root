@@ -15,7 +15,7 @@ This is the slowest converging method however, it is a good start for students.
 
 # Use this decorator when you want all the local variables printed.
 # @trace_locals
-def sqrt(S, tau=10 ** (-12)):
+def sqrt(S, tau=10 ** (-12), print_guesses=False):
     """Square Root using Bisection Search Method."""
 
     # validation
@@ -41,14 +41,17 @@ def sqrt(S, tau=10 ** (-12)):
             high = x
         x = (low + high) / 2
 
+    if print_guesses:
+        print(f"Number of guesses: {guesses}, Threshold: {tau}.")
+
     return x
 
 
 if __name__ == "__main__":
     S = float(input("Enter positive number: "))
+
     if S < 0:
-        x = complex(0, sqrt(abs(S)))
-        print("approximation for the square root of {0} is: {1}".format(S, x))
-    else:
-        x = sqrt(S)
-        print("approximation for the square root of {0} is: {1}".format(S, x))
+        raise ValueError("Invalid input. Input must be a positive number.")
+
+    x = sqrt(S)
+    print("approximation for the square root of {0} is: {1}".format(S, x))
