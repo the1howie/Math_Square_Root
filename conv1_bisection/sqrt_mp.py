@@ -7,7 +7,7 @@ Visit https://mpmath.org/
 import mpmath as mpm
 
 
-def sqrt_mp(S, precision_dps=50, print_guesses=False):
+def sqrt_mp(S, precision_dps=50, print_guesses=False, verbose=False):
     """Square Root using Bisection Search Method."""
 
     # validation
@@ -31,8 +31,22 @@ def sqrt_mp(S, precision_dps=50, print_guesses=False):
     x = mpm.fdiv(mpm.fadd(low, high), 2)
     guesses = 0
 
+    # print out each step if verbose
+    if verbose:
+        progress = "low: {0}\thigh: {1}\tguess: {2}\tguess²: {3}"
+
     # # loop until the stopping criterion is met
-    while abs(x**2 - S) >= tau:
+    while abs(mpm.fsub(mpm.power(x, 2), S)) >= tau:
+        if verbose:
+            print(
+                progress.format(
+                    mpm.nstr(low, precision_dps),
+                    mpm.nstr(high, precision_dps),
+                    mpm.nstr(x, precision_dps),
+                    mpm.nstr(mpm.power(x, 2), precision_dps),
+                )
+            )
+
         guesses += 1
         if mpm.power(x, 2) < S:
             # guess is too low
@@ -59,13 +73,13 @@ if __name__ == "__main__":
     if S < 0:
         raise ValueError("Invalid input. It must be a positive number.")
 
-    x = sqrt_mp(S, prec, True)
+    x = sqrt_mp(S, prec, True, True)
     print(
-        "\napproximation for the square root of {0} is: {1}".format(
+        "\nApproximation for the square root of {0} is: {1}".format(
             S, mpm.nstr(x, prec)
         )
     )
 
     mpm.mp.dps = prec + len(str(S)) + 1
     S = mpm.mpmathify(S)
-    print("\ncompared to mpmath.sqrt({0}): {1}".format(S, mpm.nstr(mpm.sqrt(S), prec)))
+    print("\nCompared to mpmath.sqrt({0}): {1}".format(S, mpm.nstr(mpm.sqrt(S), prec)))
