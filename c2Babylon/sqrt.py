@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+
+"""
+Babylonian Method for extracting the square root from around 1800 - 1600 BC.
+x = √S ~ x + (S - x²)/(2x)
+
+Also known as Heron's Method from the 1st century AD.
+x = √S ~ ½(x + S/x)
+
+Heron's method is an exact simplification of the Babylonian method.
+i.e., x + (S - x²)/(2x) ≡ ½(x + S/x).
+
+For simplicity, we will use xₙ₊₁ = ½(xₙ + S/xₙ).
+
+This method converges quadratically i.e., |xₙ₊₁ - S| < μ|xₙ - S|² for some arbitrarily large n.
+
+This is the most popular iterative method as it is simple and efficient. Most computers still use it.
+"""
+
+# from utils import trace_locals
+
+
+# Use this decorator when you want all the local variables printed.
+# @trace_locals
+def sqrt(S, tau=10 ** (-12), print_guesses=False, verbose=False):
+    """Square Root using Bisection Search Method."""
+
+    # validation
+    if S < 0:
+        raise ValueError("Invalid input! Expected a positive number.")
+
+    # initial guess
+    x = max(1, S) / 2
+    guesses = 0
+
+    # print out each step if verbose
+    if verbose:
+        progress = "iteration: {0}\tguess: {1}\tguess²: {2}"
+
+    # loop until the stopping criterion is met
+    while abs(x**2 - S) >= tau:
+        if verbose:
+            print(progress.format(guesses, x, x**2))
+
+        guesses += 1
+        x = (x + S / x) / 2
+
+    if print_guesses:
+        print(f"Number of guesses: {guesses}, Threshold: {tau}.")
+
+    return x
+
+
+if __name__ == "__main__":
+    S = float(input("Enter positive number: "))
+
+    if S < 0:
+        raise ValueError("Invalid input. Input must be a positive number.")
+
+    x = sqrt(S, print_guesses=True, verbose=True)
+    print("\nApproximation for the square root of {0} is: {1}".format(S, x))
+    import math
+
+    print("\nCompared to math.sqrt({0}): {1}".format(S, math.sqrt(S)))
