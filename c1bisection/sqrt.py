@@ -10,6 +10,8 @@ We halve the interval with each iteration, for example x₀ = (a + b)/2, until |
 This is the slowest converging method however, it is a good start for students.
 """
 
+import math
+
 # from utils import trace_locals
 
 
@@ -27,31 +29,62 @@ def sqrt(S, tau=10 ** (-12), print_guesses=False, verbose=False):
     high = max(1, S)
 
     # initial guess
-    x = (low + high) / 2
+    x = [(low + high) / 2]
     guesses = 0
+
+    # estimate the number of iterations
+    est_iter = num_iter(tau, S, x[0])
 
     # print out each step if verbose
     if verbose:
-        progress = "low: {0}\thigh: {1}\tguess: {2}\tguess²: {3}"
+        progress = "iteration: {0}\tlow: {1}\thigh: {2}\tguess: {3}\tguess²: {4}"
 
-    # loop until the stopping criterion is met
-    while abs(x**2 - S) >= tau:
+    # do the first iteration
+    if abs(x[-1] ** 2 - S) >= tau:
         if verbose:
-            print(progress.format(low, high, x, x**2))
-
+            print(progress.format(guesses, low, high, x[-1], x[-1] ** 2))
         guesses += 1
-        if x**2 < S:
+        if x[-1] ** 2 < S:
             # guess is too low
-            low = x
+            low = x[-1]
         else:
             # guess is too high
-            high = x
-        x = (low + high) / 2
+            high = x[-1]
+        x.append((low + high) / 2)
+
+    # loop until the stopping criterion is met after the first iteration onwards
+    while abs(x[-1] ** 2 - S) >= tau and abs(x[-1] - x[-2]) >= tau:
+        if verbose:
+            print(progress.format(guesses, low, high, x[-1], x[-1] ** 2))
+        guesses += 1
+        if x[-1] ** 2 < S:
+            # guess is too low
+            low = x[-1]
+        else:
+            # guess is too high
+            high = x[-1]
+        x.append((low + high) / 2)
 
     if print_guesses:
-        print(f"Number of guesses: {guesses}, Threshold: {tau}.")
+        print(
+            f"Number of guesses: {guesses}, Threshold: {tau}, Estimate iterations: {est_iter}."
+        )
 
-    return x
+    return x[-1]
+
+
+def num_iter(tau, S, x0):
+    """Estimate the number of iterations."""
+    d = abs(math.log10(tau))
+    mu = 1 / 2
+    e0 = abs(x0 - math.sqrt(S))
+    try:
+        if e0 != 0:
+            return math.ceil(abs(-1 * (d + math.log10(e0)) / math.log10(mu)))
+        else:
+            return 0
+    except Exception as e:
+        raise Exception(e)
 
 
 if __name__ == "__main__":
@@ -62,6 +95,5 @@ if __name__ == "__main__":
 
     x = sqrt(S, print_guesses=True, verbose=True)
     print("\nApproximation for the square root of {0} is: {1}".format(S, x))
-    import math
 
     print("\nCompared to math.sqrt({0}): {1}".format(S, math.sqrt(S)))

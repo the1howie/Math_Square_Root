@@ -15,28 +15,113 @@ from utils import capture_output
 
 @capture_output
 def run_sqrt_with_print(S):
-    results = sqrt(S, print_guesses=True)
-    return results
+    return sqrt(S, print_guesses=True)
 
 
 @pytest.mark.parametrize(
     "value, expected, printout",
     [
-        (1, 0.9999999999995453, "Number of guesses: 40, Threshold: 1e-12.\n"),
-        (2, 1.4142135623733338, "Number of guesses: 38, Threshold: 1e-12.\n"),
-        (3, 1.732050807568612, "Number of guesses: 40, Threshold: 1e-12.\n"),
-        (4, 2.0, "Number of guesses: 0, Threshold: 1e-12.\n"),
-        (9, 3.0000000000000853, "Number of guesses: 44, Threshold: 1e-12.\n"),
-        (10, 3.162277660168229, "Number of guesses: 42, Threshold: 1e-12.\n"),
-        (25, 5.000000000000071, "Number of guesses: 45, Threshold: 1e-12.\n"),
-        (37, 6.082762530298236, "Number of guesses: 47, Threshold: 1e-12.\n"),
-        (49, 6.999999999999975, "Number of guesses: 47, Threshold: 1e-12.\n"),
-        (73, 8.54400374531758, "Number of guesses: 48, Threshold: 1e-12.\n"),
-        (81, 8.999999999999968, "Number of guesses: 47, Threshold: 1e-12.\n"),
-        (100, 9.999999999999964, "Number of guesses: 48, Threshold: 1e-12.\n"),
-        (121, 10.99999999999999, "Number of guesses: 49, Threshold: 1e-12.\n"),
-        (1000, 31.62277660168378, "Number of guesses: 52, Threshold: 1e-12.\n"),
-        (10000, 100.0, "Number of guesses: 58, Threshold: 1e-12.\n"),
+        (
+            1,
+            0.9999999999990905,
+            "Number of guesses: 39, Threshold: 1e-12, Estimate iterations: 39.\n",
+        ),
+        (
+            2,
+            1.4142135623733338,
+            "Number of guesses: 38, Threshold: 1e-12, Estimate iterations: 39.\n",
+        ),
+        (
+            3,
+            1.732050807568612,
+            "Number of guesses: 40, Threshold: 1e-12, Estimate iterations: 38.\n",
+        ),
+        (4, 2.0, "Number of guesses: 0, Threshold: 1e-12, Estimate iterations: 0.\n"),
+        (
+            5,
+            2.2360679774999426,
+            "Number of guesses: 41, Threshold: 1e-12, Estimate iterations: 38.\n",
+        ),
+        (
+            7,
+            2.6457513110646005,
+            "Number of guesses: 42, Threshold: 1e-12, Estimate iterations: 40.\n",
+        ),
+        (
+            8,
+            2.828427124745758,
+            "Number of guesses: 42, Threshold: 1e-12, Estimate iterations: 41.\n",
+        ),
+        (
+            9,
+            2.9999999999998295,
+            "Number of guesses: 43, Threshold: 1e-12, Estimate iterations: 41.\n",
+        ),
+        (
+            10,
+            3.162277660168229,
+            "Number of guesses: 42, Threshold: 1e-12, Estimate iterations: 41.\n",
+        ),
+        (
+            25,
+            5.000000000000426,
+            "Number of guesses: 44, Threshold: 1e-12, Estimate iterations: 43.\n",
+        ),
+        (
+            37,
+            6.082762530297842,
+            "Number of guesses: 45, Threshold: 1e-12, Estimate iterations: 44.\n",
+        ),
+        (
+            49,
+            7.000000000000497,
+            "Number of guesses: 45, Threshold: 1e-12, Estimate iterations: 44.\n",
+        ),
+        (
+            73,
+            8.544003745317191,
+            "Number of guesses: 46, Threshold: 1e-12, Estimate iterations: 45.\n",
+        ),
+        (
+            81,
+            8.99999999999968,
+            "Number of guesses: 46, Threshold: 1e-12, Estimate iterations: 45.\n",
+        ),
+        (
+            100,
+            10.000000000000142,
+            "Number of guesses: 46, Threshold: 1e-12, Estimate iterations: 46.\n",
+        ),
+        (
+            121,
+            10.999999999999453,
+            "Number of guesses: 46, Threshold: 1e-12, Estimate iterations: 46.\n",
+        ),
+        (
+            1000,
+            31.62277660168389,
+            "Number of guesses: 49, Threshold: 1e-12, Estimate iterations: 49.\n",
+        ),
+        (
+            10_000,
+            99.99999999999953,
+            "Number of guesses: 53, Threshold: 1e-12, Estimate iterations: 53.\n",
+        ),
+        (
+            100_000,
+            316.22776601683756,
+            "Number of guesses: 56, Threshold: 1e-12, Estimate iterations: 56.\n",
+        ),
+        (
+            987_654,
+            993.8078285060951,
+            "Number of guesses: 59, Threshold: 1e-12, Estimate iterations: 59.\n",
+        ),
+        (
+            987_543_201,
+            31425.200094828353,
+            "Number of guesses: 69, Threshold: 1e-12, Estimate iterations: 69.\n",
+        ),
     ],
 )
 def test_sqrt(value, expected, printout):
