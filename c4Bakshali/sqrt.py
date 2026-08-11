@@ -6,3 +6,5 @@ Bakshali's Method for extracting the square root has quartic convergence.
 This is the fastest converging method however, ...
 
 """
+
+import math

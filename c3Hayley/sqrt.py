@@ -7,3 +7,5 @@ This is a reciprocal method.
 
 Since it converges cubically, it is faster than the Babylonian method.
 """
+
+import math

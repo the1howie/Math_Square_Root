@@ -33,7 +33,6 @@ def sqrt(S, tau=10 ** (-12), print_guesses=False, verbose=False):
 
     # initial guess
     x = [max(1, S) / 2]
-    # x = max(1, S) / 2
     guesses = 0
 
     # estimate the number of iterations
@@ -43,13 +42,13 @@ def sqrt(S, tau=10 ** (-12), print_guesses=False, verbose=False):
     if verbose:
         progress = "iteration: {0}\tguess: {1}\tguess²: {2}"
 
-        # do the first iteration
-        if abs(x[-1] ** 2 - S) >= tau:
-            if verbose:
-                print(progress.format(guesses, x[-1], x[-1] ** 2))
-            guesses += 1
-            # Babylonian / Heron / Newton approximation
-            x.append((x[-1] + S / x[-1]) / 2)
+    # do the first iteration
+    if abs(x[-1] ** 2 - S) >= tau:
+        if verbose:
+            print(progress.format(guesses, x[-1], x[-1] ** 2))
+        guesses += 1
+        # Babylonian / Heron / Newton approximation
+        x.append((x[-1] + S / x[-1]) / 2)
 
     # loop until the stopping criterion is met after the first iteration onwards
     while abs(x[-1] ** 2 - S) >= tau and abs(x[-1] - x[-2]) >= tau:
@@ -68,6 +67,7 @@ def sqrt(S, tau=10 ** (-12), print_guesses=False, verbose=False):
 
 
 def num_iter(tau, S, x0):
+    """Estimate the number of iterations."""
     d = abs(math.log10(tau))
     mu = 1 / (2 * math.sqrt(S))
     e0 = abs(math.sqrt(S) - x0)
