@@ -24,7 +24,7 @@ import math
 
 # Use this decorator when you want all the local variables printed.
 # @trace_locals
-def sqrt(S, tau=10 ** (-12), print_guesses=False, verbose=False):
+def babylon_sqrt(S, tau=10 ** (-12), print_guesses=False, verbose=False):
     """Square Root using Bisection Search Method."""
 
     # validation
@@ -88,7 +88,7 @@ if __name__ == "__main__":
     if S < 0:
         raise ValueError("Invalid input. Input must be a positive number.")
 
-    x = sqrt(S, print_guesses=True, verbose=True)
+    x = babylon_sqrt(S, print_guesses=True, verbose=True)
     print("\nApproximation for the square root of {0} is: {1}".format(S, x))
 
     print("\nCompared to math.sqrt({0}): {1}".format(S, math.sqrt(S)))

@@ -10,7 +10,7 @@ sys.path.append(str(Path(__file__).parents[2]))
 
 import pytest
 from mpmath import mp, mpf
-from sqrt_mp import sqrt_mp
+from c1bisection.bisect_sqrt_mp import bisect_sqrt_mp
 from utils import capture_output
 
 # Use the same threshold as in the vanilla version.
@@ -20,7 +20,7 @@ mp.dps = PRECISION
 
 @capture_output
 def run_sqrt_with_print(S):
-    return sqrt_mp(S, PRECISION, print_guesses=True)
+    return bisect_sqrt_mp(S, PRECISION, print_guesses=True)
 
 
 @pytest.mark.parametrize(

@@ -9,13 +9,13 @@ sys.path.append(str(Path(__file__).parents[2]))
 
 
 import pytest
-from sqrt import sqrt
+from c1bisection.bisect_sqrt import bisect_sqrt
 from utils import capture_output
 
 
 @capture_output
 def run_sqrt_with_print(S):
-    return sqrt(S, print_guesses=True)
+    return bisect_sqrt(S, print_guesses=True)
 
 
 @pytest.mark.parametrize(

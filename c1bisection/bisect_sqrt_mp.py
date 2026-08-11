@@ -7,7 +7,7 @@ Visit https://mpmath.org/
 import mpmath as mpm
 
 
-def sqrt_mp(S, precision_dps=15, print_guesses=False, verbose=False):
+def bisect_sqrt_mp(S, precision_dps=15, print_guesses=False, verbose=False):
     """Square Root using Bisection Search Method."""
 
     # validation
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     # significant figures for printing
     sf = prec + len(str(S))
 
-    x = sqrt_mp(S, prec, True, True)
+    x = bisect_sqrt_mp(S, prec, True, True)
     print(
         "\nApproximation for the square root of {0} is: {1}".format(S, mpm.nstr(x, sf))
     )
