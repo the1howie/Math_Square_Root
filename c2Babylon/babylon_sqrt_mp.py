@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 
 """
-Visit https://mpmath.org/
+The Babylonian / Heron's / Newton's Method for finding the square root.
+
+Using the multi-precision math library https://mpmath.org/
 """
 
 import mpmath as mpm
 
 
 def babylon_sqrt_mp(S, precision_dps=50, print_guesses=False, verbose=False):
-    """Square Root using Bisection Search Method."""
+    """Square Root using Babylonian Method."""
 
     # validation
     if S < 0:

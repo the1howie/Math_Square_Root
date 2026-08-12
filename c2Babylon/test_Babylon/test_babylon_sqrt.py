@@ -122,6 +122,21 @@ def run_sqrt_with_print(S):
             31425.200094828353,
             "Number of guesses: 20, Threshold: 1e-12, Estimate iterations: 3.\n",
         ),
+        (
+            673_003_460_632_639_326_586_069_439_443,
+            820367881278051.5,
+            "Number of guesses: 54, Threshold: 1e-12, Estimate iterations: 1.\n",
+        ),
+        (
+            1_000_000_000_000_000_000_000_000_000_000,
+            1000000000000000.0,
+            "Number of guesses: 54, Threshold: 1e-12, Estimate iterations: 1.\n",
+        ),
+        (
+            1_367_999_732_000_000_000_000_000_000_071,
+            1169615206809487.5,
+            "Number of guesses: 55, Threshold: 1e-12, Estimate iterations: 1.\n",
+        ),
     ],
 )
 def test_sqrt(value, expected, printout):

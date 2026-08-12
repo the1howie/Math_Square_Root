@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
 """
-Visit https://mpmath.org/
+The Bisection Brute-Force Search Method to calculate the square root.
+
+Using the multi-precision math library https://mpmath.org/
 """
 
 import mpmath as mpm
