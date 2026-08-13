@@ -17,12 +17,19 @@ import math
 
 # Use this decorator when you want all the local variables printed.
 # @trace_locals
-def bisect_sqrt(S, tau=10 ** (-12), print_guesses=False, verbose=False):
+def bisect_sqrt(S, precision_dps=15, print_guesses=False, verbose=False):
     """Square Root using Bisection Search Method."""
 
     # validation
     if S < 0:
         raise ValueError("Invalid input! Expected a positive number.")
+
+    # trivial
+    if S == 0:
+        return 0
+
+    # set threshold
+    tau = 10 ** (-1 * precision_dps)
 
     # initial interval
     low = 0
@@ -88,12 +95,27 @@ def num_iter(tau, S, x0):
 
 
 if __name__ == "__main__":
-    S = float(input("Enter positive number: "))
-
+    S = input("Enter positive number: ")
+    try:
+        S = float(S)
+    except Exception as e:
+        raise Exception(e)
     if S < 0:
         raise ValueError("Invalid input. Input must be a positive number.")
 
-    x = bisect_sqrt(S, print_guesses=True, verbose=True)
+    dp = input("Enter precision between 0 and 15 (Default 15 d.p.): ")
+    try:
+        dp = int(dp)
+    except Exception:
+        dp = 15
+    if dp < 0:
+        raise ValueError("Invalid input. Input must be a positive number.")
+    if dp > 15:
+        raise ValueError("Invalid input. Input must be between 0 and 15.")
+
+    tau = 10 ** (-1 * dp)
+
+    x = bisect_sqrt(S, tau=tau, print_guesses=True, verbose=True)
     print("\nApproximation for the square root of {0} is: {1}".format(S, x))
 
     print("\nCompared to math.sqrt({0}): {1}".format(S, math.sqrt(S)))

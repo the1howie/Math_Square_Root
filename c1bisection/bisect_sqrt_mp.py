@@ -120,12 +120,12 @@ def num_iter(tau, S, x0):
 
 if __name__ == "__main__":
     S = float(input("Enter positive number: "))
-    prec = int(input("Enter dps (precision): "))
-    if prec < 0:
-        raise ValueError("Invalid input. It must be a positive integer.")
-
     if S < 0:
         raise ValueError("Invalid input. It must be a positive number.")
+
+    prec = int(input("Enter precision (defaul precision): "))
+    if prec < 0:
+        raise ValueError("Invalid input. It must be a positive integer.")
 
     # significant figures for printing
     sf = prec + len(str(S))

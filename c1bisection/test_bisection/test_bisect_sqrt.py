@@ -12,10 +12,12 @@ import pytest
 from c1bisection.bisect_sqrt import bisect_sqrt
 from utils import capture_output
 
+PRECISION = 12
+
 
 @capture_output
 def run_sqrt_with_print(S):
-    return bisect_sqrt(S, print_guesses=True)
+    return bisect_sqrt(S, precision_dps=PRECISION, print_guesses=True)
 
 
 @pytest.mark.parametrize(
