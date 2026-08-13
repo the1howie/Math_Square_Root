@@ -24,7 +24,7 @@ def bisect_sqrt(S, precision_dps=15, print_guesses=False, verbose=False):
     if S < 0:
         raise ValueError("Invalid input! Expected a positive number.")
 
-    # trivial
+    # trivial case
     if S == 0:
         return 0
 
@@ -94,7 +94,7 @@ def num_iter(tau, S, x0):
         raise Exception(e)
 
 
-if __name__ == "__main__":
+def main():
     S = input("Enter positive number: ")
     try:
         S = float(S)
@@ -103,19 +103,20 @@ if __name__ == "__main__":
     if S < 0:
         raise ValueError("Invalid input. Input must be a positive number.")
 
-    dp = input("Enter precision between 0 and 15 (Default 15 d.p.): ")
+    prec = input("Enter precision between 0 and 15 (Default 15 d.p.): ")
     try:
-        dp = int(dp)
+        prec = int(prec)
     except Exception:
-        dp = 15
-    if dp < 0:
+        prec = 15
+    if prec < 0:
         raise ValueError("Invalid input. Input must be a positive number.")
-    if dp > 15:
+    if prec > 15:
         raise ValueError("Invalid input. Input must be between 0 and 15.")
 
-    tau = 10 ** (-1 * dp)
-
-    x = bisect_sqrt(S, tau=tau, print_guesses=True, verbose=True)
+    x = bisect_sqrt(S, precision_dps=prec, print_guesses=True, verbose=True)
     print("\nApproximation for the square root of {0} is: {1}".format(S, x))
-
     print("\nCompared to math.sqrt({0}): {1}".format(S, math.sqrt(S)))
+
+
+if __name__ == "__main__":
+    main()

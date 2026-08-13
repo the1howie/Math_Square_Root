@@ -20,7 +20,7 @@ mp.dps = PRECISION
 
 @capture_output
 def run_sqrt_with_print(S):
-    return babylon_sqrt_mp(S, PRECISION, print_guesses=True)
+    return babylon_sqrt_mp(S, precision_dps=PRECISION, print_guesses=True)
 
 
 @pytest.mark.parametrize(

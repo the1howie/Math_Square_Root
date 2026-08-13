@@ -16,6 +16,10 @@ def bisect_sqrt_mp(S, precision_dps=15, print_guesses=False, verbose=False):
     if S < 0:
         raise ValueError("Invalid input! Expected a positive number.")
 
+    # trivial case
+    if S == 0:
+        return mpm.mpf(0)
+
     # set precision
     mpm.mp.dps = min(15, precision_dps)
 
@@ -118,14 +122,22 @@ def num_iter(tau, S, x0):
         raise Exception(e)
 
 
-if __name__ == "__main__":
-    S = float(input("Enter positive number: "))
+def main():
+    S = input("Enter positive number: ")
+    try:
+        S = float(S)
+    except Exception as e:
+        raise Exception(e)
     if S < 0:
-        raise ValueError("Invalid input. It must be a positive number.")
+        raise ValueError("Invalid input. Input must be a positive number.")
 
-    prec = int(input("Enter precision (defaul precision): "))
+    prec = input("Enter precision (Default 15 d.p.): ")
+    try:
+        prec = int(prec)
+    except Exception:
+        prec = 15
     if prec < 0:
-        raise ValueError("Invalid input. It must be a positive integer.")
+        raise ValueError("Invalid input. Input must be a positive number.")
 
     # significant figures for printing
     sf = prec + len(str(S))
@@ -138,3 +150,7 @@ if __name__ == "__main__":
     mpm.mp.dps = min(15, prec)
     S = mpm.mpmathify(S)
     print("\nCompared to mpmath.sqrt({0}): {1}".format(S, mpm.nstr(mpm.sqrt(S), sf)))
+
+
+if __name__ == "__main__":
+    main()
