@@ -9,12 +9,16 @@ Using the multi-precision math library https://mpmath.org/
 import mpmath as mpm
 
 
-def halley_sqrt_mp(S, precision_dps=50, print_guesses=False, verbose=False):
+def halley_sqrt_mp(S, precision_dps=15, print_guesses=False, verbose=False):
     """Square Root using Halley's Method."""
 
     # validation
     if S < 0:
         raise ValueError("Invalid input! Expected a positive number.")
+
+    # trivial case
+    if S == 0:
+        return mpm.mpf(0)
 
     # set precision
     mpm.mp.dps = min(15, precision_dps)
@@ -149,14 +153,22 @@ def num_iter(tau, S, x0):
         raise Exception(e)
 
 
-if __name__ == "__main__":
-    S = float(input("Enter positive number: "))
-    prec = int(input("Enter dps (precision): "))
-    if prec < 0:
-        raise ValueError("Invalid input. It must be a positive integer.")
-
+def main():
+    S = input("Enter positive number: ")
+    try:
+        S = float(S)
+    except Exception as e:
+        raise Exception(e)
     if S < 0:
-        raise ValueError("Invalid input. It must be a positive number.")
+        raise ValueError("Invalid input. Input must be a positive number.")
+
+    prec = input("Enter precision (Default 15 d.p.): ")
+    try:
+        prec = int(prec)
+    except Exception:
+        prec = 15
+    if prec < 0:
+        raise ValueError("Invalid input. Input must be a positive number.")
 
     # significant figures for printing
     sf = prec + len(str(S))
@@ -169,3 +181,7 @@ if __name__ == "__main__":
     mpm.mp.dps = min(15, prec)
     S = mpm.mpmathify(S)
     print("\nCompared to mpmath.sqrt({0}): {1}".format(S, mpm.nstr(mpm.sqrt(S), sf)))
+
+
+if __name__ == "__main__":
+    main()
