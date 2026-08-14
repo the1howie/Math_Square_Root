@@ -10,6 +10,30 @@ import io
 from contextlib import redirect_stdout
 
 
+def write_data_to_file(data_list, file_path):
+    """used for writing test data to file"""
+
+    # validations
+    if not isinstance(data_list, list):
+        raise Exception("Data is not a list.")
+
+    if len(data_list) == 0:
+        raise Exception("Empty data list.")
+
+    try:
+        # open file
+        with open(file_path, "w") as f:
+            # write elements from the list to the file
+            for item in data_list:
+                f.write(f"{str(item)}\n")
+
+        # close file
+        f.close()
+        print(f"Data written successfully to: {file_path}")
+    except Exception as e:
+        raise Exception(e)
+
+
 def capture_output(func):
     """returns {"value": value, "printout": captured_string}"""
 

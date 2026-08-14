@@ -223,3 +223,7 @@ nearest/squares.json
 
 # Jupyter notebooks
 notebooks/
+
+# Test data
+data/
+notebooks/data/

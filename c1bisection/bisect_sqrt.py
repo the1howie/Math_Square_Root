@@ -11,13 +11,16 @@ This is the slowest converging method however, it is a good start for students.
 """
 
 import math
+from utils import write_data_to_file
 
 # from utils import trace_locals
 
 
 # Use this decorator when you want all the local variables printed.
 # @trace_locals
-def bisect_sqrt(S, precision_dps=15, print_guesses=False, verbose=False):
+def bisect_sqrt(
+    S, precision_dps=15, print_guesses=False, verbose=False, file_path=None
+):
     """Square Root using Bisection Search Method."""
 
     # validation
@@ -77,6 +80,11 @@ def bisect_sqrt(S, precision_dps=15, print_guesses=False, verbose=False):
             f"Number of guesses: {guesses}, Threshold: {tau}, Estimate iterations: {est_iter}."
         )
 
+    # write guesses to file
+    if file_path is not None:
+        write_data_to_file(x, file_path)
+
+    # return the final guess
     return x[-1]
 
 
