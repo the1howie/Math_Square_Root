@@ -25,7 +25,9 @@ from utils import write_data_to_file
 
 # Use this decorator when you want all the local variables printed.
 # @trace_locals
-def babylon_sqrt(S, precision_dps=15, print_guesses=False, verbose=False, file_path=None):
+def babylon_sqrt(
+    S, precision_dps=15, print_guesses=False, verbose=False, file_path=None
+):
     """Square Root using Bisection Search Method."""
 
     # validation
@@ -75,7 +77,7 @@ def babylon_sqrt(S, precision_dps=15, print_guesses=False, verbose=False, file_p
     if file_path is not None:
         write_data_to_file(x, file_path)
 
-    # return the final guess  
+    # return the final guess
     return x[-1]
 
 

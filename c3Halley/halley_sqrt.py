@@ -23,7 +23,9 @@ from utils import write_data_to_file
 
 # Use this decorator when you want all the local variables printed.
 # @trace_locals
-def halley_sqrt(S, precision_dps=15, print_guesses=False, verbose=False, file_path=None):
+def halley_sqrt(
+    S, precision_dps=15, print_guesses=False, verbose=False, file_path=None
+):
     """Square Root using Halley's Method."""
 
     # validation
