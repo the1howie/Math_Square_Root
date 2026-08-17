@@ -1,5 +1,5 @@
 """
-Square root approximation as a simple continued fraction.
+Square root approximation as a simple continued fraction using recursion.
 
 https://en.wikipedia.org/wiki/Rafael_Bombelli#:~:text=%5B6%5D-,Bombelli%27s%20method%20of%20calculating%20square%20roots,-edit
 """
