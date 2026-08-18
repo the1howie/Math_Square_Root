@@ -17,6 +17,12 @@ This method converges quadratically i.e., |xₙ₊₁ - S| < μ|xₙ - S|² for 
 This is the most popular iterative method as it is simple and efficient. Most computers still use it.
 """
 
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__)))
+sys.path.append(str(Path(__file__).parents[1]))
+
 import math
 from utils import write_data_to_file
 

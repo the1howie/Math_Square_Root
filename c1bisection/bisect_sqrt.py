@@ -10,6 +10,12 @@ We halve the interval with each iteration, for example x₀ = (a + b)/2, until |
 This is the slowest converging method however, it is a good start for students.
 """
 
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__)))
+sys.path.append(str(Path(__file__).parents[1]))
+
 import math
 from utils import write_data_to_file
 

@@ -15,6 +15,12 @@ To obtain: x[n+1] = x[n] * (x[n]^2 + 3*S) / (3*x[n]^2 + S)
 Since it converges cubically, it is faster than the Babylonian method.
 """
 
+import sys
+from pathlib import Path
+
+sys.path.append(str(Path(__file__)))
+sys.path.append(str(Path(__file__).parents[1]))
+
 import math
 from utils import write_data_to_file
 
